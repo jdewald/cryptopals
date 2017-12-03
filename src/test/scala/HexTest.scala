@@ -8,12 +8,12 @@ class HexTest extends WordSpecLike with Matchers {
 
   "A Hex Converter" should {
     "Convert byte to string" in {
-      Hex.chars(Vector(0xAB.toByte)).toSeq should equal (Seq('A','B'))
+      Hex.chars(Vector(0xAB.toByte)).toSeq should equal (Seq('a','b'))
     }
 
 
     "Convert hex chars to bytes" in {
-      Hex.bytes("4D".toCharArray).toSeq should equal (Seq(0x4D.toByte))
+      Hex.bytes("4d".toCharArray).toSeq should equal (Seq(0x4D.toByte))
     }
 
 

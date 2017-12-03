@@ -8,7 +8,7 @@ import scala.collection.mutable.ArrayBuffer
   */
 object Hex {
 
-  val HEX_MAP: List[Char] = "0123456789ABCDEF".toList
+  val HEX_MAP: List[Char] = "0123456789abcdef".toList
   /**
     * Takes pairs of hex chars and outputs a stream of bytes
     * @param hexChars
@@ -19,7 +19,7 @@ object Hex {
     var first = true
     var nibble = 0
     hexChars.foreach { c =>
-      val d = HEX_MAP.indexOf(c.toUpper)
+      val d = HEX_MAP.indexOf(c.toLower)
       if (first) nibble = d * 16
       else {
         nibble += d
