@@ -30,7 +30,7 @@ object Hex {
     out
   }
 
-  def chars(hexBytes: Traversable[Byte]): Traversable[Char] = {
+  def chars(hexBytes: Traversable[Byte]): Iterable[Char] = {
     val out = mutable.MutableList.empty[Char]
 
     hexBytes.foreach { b =>

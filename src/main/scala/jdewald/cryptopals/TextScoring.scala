@@ -17,4 +17,5 @@ object TextScoring {
     if (! a.contains(" ")) a.length
     else a.length() / a.replaceAll("[^ ]", "").length
   }
+
 }

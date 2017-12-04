@@ -5,7 +5,7 @@ import org.scalatest.Matchers._
 /**
   * Created by jdewald on 12/2/17.
   */
-class Base64Test extends WordSpecLike with Matchers {{
+class Base64Test extends WordSpecLike with Matchers {
   "A Base64 Encoder" should {
     "Encode bytes" in {
       Base64.encode(Seq(77,97,110)) shouldBe "TWFu"
@@ -20,5 +20,9 @@ class Base64Test extends WordSpecLike with Matchers {{
       b64 shouldBe "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t"
     }
   }
-}
+  "A Base64 Decoder" should {
+    "Decode base64" in {
+      Base64.decode("TWFu").toSeq should equal (Seq(77,97,110))
+    }
+  }
 }
