@@ -15,8 +15,7 @@ object Xor {
     * @return
     */
   def xor(a: Traversable[Byte], b: Traversable[Byte]): Traversable[Byte] = {
-    val zipped = a.toIterable zip Stream.continually(b).flatten
-    zipped.map(xor)
+    (a.toIterable zip Stream.continually(b).flatten).map(xor)
   }
 
   def xor(a: Traversable[Byte], b: Byte): Traversable[Byte] = {
