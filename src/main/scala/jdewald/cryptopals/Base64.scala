@@ -43,7 +43,7 @@ object Base64 {
     var idx = 0
     var prev = 0
     // each character represents 6 bytes from the original
-    encoded foreach { c =>
+    encoded.filter( c => B64_MAP.indexOf(c) > -1) foreach { c =>
       var byteVal = B64_MAP.indexOf(c)
       idx match {
         case 0 =>

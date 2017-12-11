@@ -22,5 +22,11 @@ class HammingTest extends WordSpecLike with Matchers {
         "wokka wokka!!!".getBytes
       ) shouldBe 37
     }
+    "Calculate bit distance correctly on single byte array" in {
+      Hamming.bitDistance(
+        "a".getBytes,
+        "b".getBytes
+      ) shouldBe 2
+    }
   }
 }
