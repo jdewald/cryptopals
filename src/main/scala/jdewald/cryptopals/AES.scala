@@ -10,13 +10,35 @@ import scala.collection.mutable
   */
 object AES {
 
-  def decryptecb(plaintext: Iterable[Byte], key: Iterable[Byte]): Iterable[Byte] = {
+  def decryptecb(ciphertext: Iterable[Byte], key: Iterable[Byte]): Iterable[Byte] = {
 
     val cipher = Cipher.getInstance("AES/ECB/NoPadding")
     val secret = new SecretKeySpec(key.toArray, "AES")
     cipher.init(Cipher.DECRYPT_MODE, secret)
 
+    cipher.doFinal(ciphertext.toArray)
+  }
+
+  def encryptecb(plaintext: Iterable[Byte], key: Iterable[Byte]): Iterable[Byte] = {
+
+    val cipher = Cipher.getInstance("AES/ECB/NoPadding")
+    val secret = new SecretKeySpec(key.toArray, "AES")
+    cipher.init(Cipher.ENCRYPT_MODE, secret)
+
     cipher.doFinal(plaintext.toArray)
+  }
+
+  def decryptCBC: (Iterable[Byte], Iterable[Byte], Iterable[Byte]) => Iterable[Byte] = CBC(decryptecb)
+  def encryptCBC: (Iterable[Byte], Iterable[Byte], Iterable[Byte]) => Iterable[Byte] = CBC(encryptecb)
+
+
+  def CBC(fn: (Iterable[Byte], Iterable[Byte]) => Iterable[Byte])(cipherOrPlain: Iterable[Byte], key:Iterable[Byte], iv:Iterable[Byte]): Iterable[Byte] = {
+    var prev = iv
+    cipherOrPlain.grouped(key.size).map( block => {
+      val text = Xor.xor(fn(block, key), prev)
+      prev = block // the chain
+      text
+    }).flatten.toIterable
   }
 
   /*
